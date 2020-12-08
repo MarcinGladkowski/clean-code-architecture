@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 class Controller extends AbstractController
 {
 
-    function index()
+    public function index()
     {
         return new JsonResponse('ReallyDirty API v1.0');
     }
 
-    function doctor(Request $request)
+    public function doctor(Request $request)
     {
         if ($request->getMethod() === 'GET') {
             $doctorId = $request->get('id');
@@ -59,7 +59,7 @@ class Controller extends AbstractController
         }
     }
 
-    function slots(int $doctorId, Request $request)
+    public function slots(int $doctorId, Request $request)
     {
         /** @var EntityManagerInterface $objectManager */
         $objectManager = $this->getDoctrine()->getManager();
