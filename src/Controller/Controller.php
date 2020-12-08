@@ -25,12 +25,14 @@ class Controller extends AbstractController
             $doctor =$this->getDoctor($request->get('id'));
 
             if ($doctor) {
+
                 return new JsonResponse([
                     'id' => $doctor->getId(),
                     'firstName' => $doctor->getFirstName(),
                     'lastName' => $doctor->getLastName(),
                     'specialization' => $doctor->getSpecialization(),
                 ]);
+
             } else {
                 return new JsonResponse([], 404);
             }
@@ -73,9 +75,8 @@ class Controller extends AbstractController
 
                 return new JsonResponse(['id' => $slot->getId()]);
             }
-        } else {
-            return new JsonResponse([], 404);
         }
+        return new JsonResponse([], 404);
     }
 
     /**
