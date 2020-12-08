@@ -65,11 +65,13 @@ class Controller extends AbstractController
                 }
             } elseif ($request->getMethod() === 'POST') {
 
-                $slot = new SlotEntity();
-                $slot->setDay(new DateTime($request->get('day')));
-                $slot->setDoctor($doctor);
-                $slot->setDuration((int)$request->get('duration'));
-                $slot->setFromHour($request->get('from_hour'));
+                $slot = $this->createSlot(
+                    $doctor,
+                    new \DateTime($request->get('day')),
+                    (int)$request->get('duration'),
+                    $request->get('from_hour')
+                );
+
                 $this->save($slot);
 
                 return new JsonResponse(['id' => $slot->getId()]);
@@ -128,6 +130,17 @@ class Controller extends AbstractController
         $doctor->setSpecialization($specialization);
 
         return $doctor;
+    }
+
+    private function createSlot(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour)
+    {
+        $slot = new SlotEntity();
+        $slot->setDay($day);
+        $slot->setDoctor($doctor);
+        $slot->setDuration($duration);
+        $slot->setFromHour($fromHour);
+
+        return $slot;
     }
 
 }
