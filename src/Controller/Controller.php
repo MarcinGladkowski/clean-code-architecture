@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\DoctorEntity;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Controller\DoctorEntity;
 
 class Controller extends AbstractController
 {
@@ -36,15 +36,13 @@ class Controller extends AbstractController
             }
         } elseif ($request->getMethod() === 'POST') {
 
-            $objectManager = $this->getDoctrine()->getManager();
+            $doctor = $this->createDoctor(
+                $request->get('firstName'),
+                $request->get('lastName'),
+                $request->get('specialization')
+            );
 
-            $doctor = new DoctorEntity();
-            $doctor->setFirstName($request->get('firstName'));
-            $doctor->setLastName($request->get('lastName'));
-            $doctor->setSpecialization($request->get('specialization'));
-
-            $objectManager->persist($doctor);
-            $objectManager->flush();
+            $this->save($doctor);
 
             return new JsonResponse(['id' => $doctor->getId()]);
         }
@@ -72,9 +70,7 @@ class Controller extends AbstractController
                 $slot->setDoctor($doctor);
                 $slot->setDuration((int)$request->get('duration'));
                 $slot->setFromHour($request->get('from_hour'));
-
-                $this->getObjectManager()->persist($slot);
-                $this->getObjectManager()->flush();
+                $this->save($slot);
 
                 return new JsonResponse(['id' => $slot->getId()]);
             }
@@ -116,6 +112,22 @@ class Controller extends AbstractController
             ];
         }
         return $res;
+    }
+
+    private function save($object)
+    {
+        $this->getObjectManager()->persist($object);
+        $this->getObjectManager()->flush();
+    }
+
+    private function createDoctor($firstName, $lastName, $specialization): DoctorEntity
+    {
+        $doctor = new DoctorEntity();
+        $doctor->setFirstName($firstName);
+        $doctor->setLastName($lastName);
+        $doctor->setSpecialization($specialization);
+
+        return $doctor;
     }
 
 }
