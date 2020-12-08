@@ -114,7 +114,7 @@ class Controller extends AbstractController
         return $res;
     }
 
-    private function save($object)
+    private function save($object): void
     {
         $this->getObjectManager()->persist($object);
         $this->getObjectManager()->flush();
@@ -130,7 +130,7 @@ class Controller extends AbstractController
         return $doctor;
     }
 
-    private function createSlot(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour)
+    private function createSlot(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
     {
         $slot = new SlotEntity();
         $slot->setDay($day);
