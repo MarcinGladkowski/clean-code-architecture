@@ -23,14 +23,7 @@ class Controller extends AbstractController
         if ($request->getMethod() === 'GET') {
             $doctorId = $request->get('id');
 
-            $doctor = $this->getObjectManager()->createQueryBuilder()
-                ->select('doctor')
-                ->from(DoctorEntity::class, 'doctor')
-                ->where('doctor.id=:id')
-                ->setParameter('id', $doctorId)
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getOneOrNullResult();
+            $doctor =$this->getDoctor($doctorId);
 
             if ($doctor) {
                 return new JsonResponse([
@@ -60,14 +53,7 @@ class Controller extends AbstractController
 
     public function slots(int $doctorId, Request $request)
     {
-        $doctor = $this->getObjectManager()->createQueryBuilder()
-            ->select('doctor')
-            ->from(DoctorEntity::class, 'doctor')
-            ->where('doctor.id=:id')
-            ->setParameter('id', $doctorId)
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $doctor = $this->getDoctor($doctorId);
 
         if ($doctor) {
 
@@ -113,6 +99,18 @@ class Controller extends AbstractController
     private function getObjectManager()
     {
         return $this->getDoctrine()->getManager();
+    }
+
+    private function getDoctor($doctorId)
+    {
+        return $this->getObjectManager()->createQueryBuilder()
+            ->select('doctor')
+            ->from(DoctorEntity::class, 'doctor')
+            ->where('doctor.id=:id')
+            ->setParameter('id', $doctorId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 }
