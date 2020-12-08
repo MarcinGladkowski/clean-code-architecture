@@ -20,17 +20,15 @@ class Controller extends AbstractController
     function doctor(Request $request)
     {
         if ($request->getMethod() === 'GET') {
-//get doctor
-            $id = $request->get('id');
+            $doctorId = $request->get('id');
             /** @var EntityManagerInterface $objectManager */
             $objectManager = $this->getDoctrine()->getManager();
 
-// get doctor
             $doctor = $objectManager->createQueryBuilder()
                 ->select('doctor')
                 ->from(DoctorEntity::class, 'doctor')
                 ->where('doctor.id=:id')
-                ->setParameter('id', $id)
+                ->setParameter('id', $doctorId)
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getOneOrNullResult();
@@ -46,7 +44,7 @@ class Controller extends AbstractController
                 return new JsonResponse([], 404);
             }
         } elseif ($request->getMethod() === 'POST') {
-//add doctor
+
             $objectManager = $this->getDoctrine()->getManager();
 
             $doctor = new DoctorEntity();
@@ -57,19 +55,16 @@ class Controller extends AbstractController
             $objectManager->persist($doctor);
             $objectManager->flush();
 
-// result
             return new JsonResponse(['id' => $doctor->getId()]);
         }
-
-        //TODO other methods?
     }
 
     function slots(int $doctorId, Request $request)
     {
         /** @var EntityManagerInterface $objectManager */
         $objectManager = $this->getDoctrine()->getManager();
-// get doctor
-        $doc = $objectManager->createQueryBuilder()
+
+        $doctor = $objectManager->createQueryBuilder()
             ->select('doctor')
             ->from(DoctorEntity::class, 'doctor')
             ->where('doctor.id=:id')
@@ -78,16 +73,15 @@ class Controller extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
-        if ($doc) {
+        if ($doctor) {
 
             if ($request->getMethod() === 'GET') {
-//get slots
-                /** @var SlotEntity[] $array */
-                $array = $doc->slots();
+                /** @var SlotEntity[] $slots */
+                $slots = $doctor->slots();
 
-                if (count($array)) {
+                if (count($slots)) {
                     $res = [];
-                    foreach ($array as $slot) {
+                    foreach ($slots as $slot) {
                         $res[] = [
                             'id' => $slot->getId(),
                             'day' => $slot->getDay()->format('Y-m-d'),
@@ -100,17 +94,16 @@ class Controller extends AbstractController
                     return new JsonResponse([]);
                 }
             } elseif ($request->getMethod() === 'POST') {
-// add slot
+
                 $slot = new SlotEntity();
                 $slot->setDay(new DateTime($request->get('day')));
-                $slot->setDoctor($doc);
+                $slot->setDoctor($doctor);
                 $slot->setDuration((int)$request->get('duration'));
                 $slot->setFromHour($request->get('from_hour'));
 
                 $objectManager->persist($slot);
                 $objectManager->flush();
 
-// result
                 return new JsonResponse(['id' => $slot->getId()]);
             }
         } else {
