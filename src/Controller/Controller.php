@@ -53,16 +53,13 @@ class Controller extends AbstractController
         $doctor = $this->getDoctor($doctorId);
 
         if ($doctor) {
-
             if ($request->getMethod() === 'GET') {
+
                 /** @var SlotEntity[] $slots */
                 $slots = $this->extractDoctorSlots($doctor);
 
-                if (count($slots)) {
-                    return new JsonResponse($slots);
-                } else {
-                    return new JsonResponse([]);
-                }
+                return new JsonResponse(count($slots) ? $slots : []);
+
             } elseif ($request->getMethod() === 'POST') {
 
                 $slot = $this->createSlot(
