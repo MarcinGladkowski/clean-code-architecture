@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use App\Controller\DoctorEntity;
 
 class Controller extends AbstractController
 {
@@ -21,9 +22,7 @@ class Controller extends AbstractController
     public function doctor(Request $request)
     {
         if ($request->getMethod() === 'GET') {
-            $doctorId = $request->get('id');
-
-            $doctor =$this->getDoctor($doctorId);
+            $doctor =$this->getDoctor($request->get('id'));
 
             if ($doctor) {
                 return new JsonResponse([
@@ -59,19 +58,10 @@ class Controller extends AbstractController
 
             if ($request->getMethod() === 'GET') {
                 /** @var SlotEntity[] $slots */
-                $slots = $doctor->slots();
+                $slots = $this->extractDoctorSlots($doctor);
 
                 if (count($slots)) {
-                    $res = [];
-                    foreach ($slots as $slot) {
-                        $res[] = [
-                            'id' => $slot->getId(),
-                            'day' => $slot->getDay()->format('Y-m-d'),
-                            'from_hour' => $slot->getFromHour(),
-                            'duration' => $slot->getDuration()
-                        ];
-                    }
-                    return new JsonResponse($res);
+                    return new JsonResponse($slots);
                 } else {
                     return new JsonResponse([]);
                 }
@@ -111,6 +101,21 @@ class Controller extends AbstractController
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    private function extractDoctorSlots(DoctorEntity $doctor)
+    {
+        $slots = $doctor->slots();
+        $res = [];
+        foreach ($slots as $slot) {
+            $res[] = [
+                'id' => $slot->getId(),
+                'day' => $slot->getDay()->format('Y-m-d'),
+                'from_hour' => $slot->getFromHour(),
+                'duration' => $slot->getDuration()
+            ];
+        }
+        return $res;
     }
 
 }
