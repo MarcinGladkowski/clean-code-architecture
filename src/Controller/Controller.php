@@ -20,35 +20,45 @@ class Controller extends AbstractController
         return new JsonResponse('ReallyDirty API v1.0');
     }
 
-    public function doctor(Request $request)
+    /**
+     * @Route("/doctor", methods={"POST"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addDoctorAction(Request $request)
     {
-        if ($request->getMethod() === 'GET') {
-            $doctor =$this->getDoctor($request->get('id'));
+        $doctor = $this->createDoctor(
+            $request->get('firstName'),
+            $request->get('lastName'),
+            $request->get('specialization')
+        );
 
-            if ($doctor) {
+        $this->save($doctor);
 
-                return new JsonResponse([
+        return new JsonResponse(['id' => $doctor->getId()]);
+    }
+
+    /**
+     * @Route("/doctor", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getDoctorAction(Request $request)
+    {
+        $doctor = $this->getDoctor($request->get('id'));
+
+        if ($doctor) {
+            return new JsonResponse(
+                [
                     'id' => $doctor->getId(),
                     'firstName' => $doctor->getFirstName(),
                     'lastName' => $doctor->getLastName(),
                     'specialization' => $doctor->getSpecialization(),
-                ]);
-
-            } else {
-                return new JsonResponse([], 404);
-            }
-        } elseif ($request->getMethod() === 'POST') {
-
-            $doctor = $this->createDoctor(
-                $request->get('firstName'),
-                $request->get('lastName'),
-                $request->get('specialization')
+                ]
             );
-
-            $this->save($doctor);
-
-            return new JsonResponse(['id' => $doctor->getId()]);
         }
+
+        return new JsonResponse([], 404);
     }
 
     /**
