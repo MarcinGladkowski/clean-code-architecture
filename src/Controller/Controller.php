@@ -57,7 +57,7 @@ class Controller extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function showSlots(int $doctorId, Request $request)
+    public function getSlotsAction(int $doctorId, Request $request)
     {
         $doctor = $this->getDoctor($doctorId);
 
@@ -75,7 +75,7 @@ class Controller extends AbstractController
      * @return JsonResponse
      * @throws \Exception
      */
-    public function saveSlots(int $doctorId, Request $request)
+    public function addSlotsAction(int $doctorId, Request $request)
     {
         $doctor = $this->getDoctor($doctorId);
 
