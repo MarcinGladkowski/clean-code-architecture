@@ -6,6 +6,12 @@ doctor:
     path: /doctor
     controller: App\Controller\Controller::doctor
 
-slots:
+slots_get:
     path: /slots/{doctorId}
-    controller: App\Controller\Controller::slots
+    methods: GET
+    controller: App\Controller\Controller::showSlots
+
+slots_save:
+    path: /slots/{doctorId}
+    methods: POST
+    controller: App\Controller\Controller::saveSlots

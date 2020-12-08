@@ -10,6 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class Controller extends AbstractController
 {
@@ -50,33 +51,48 @@ class Controller extends AbstractController
         }
     }
 
-    public function slots(int $doctorId, Request $request)
+    /**
+     * @Route("/slots/{doctorId}", methods={"GET"})
+     * @param int $doctorId
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function showSlots(int $doctorId, Request $request)
     {
         $doctor = $this->getDoctor($doctorId);
 
         if ($doctor) {
             if ($request->getMethod() === 'GET') {
-
                 /** @var SlotEntity[] $slots */
                 $slots = $this->extractDoctorSlots($doctor);
 
                 return new JsonResponse(count($slots) ? $slots : []);
-
-            } elseif ($request->getMethod() === 'POST') {
-
-                $slot = $this->createSlot(
-                    $doctor,
-                    new \DateTime($request->get('day')),
-                    (int)$request->get('duration'),
-                    $request->get('from_hour')
-                );
-
-                $this->save($slot);
-
-                return new JsonResponse(['id' => $slot->getId()]);
             }
         }
-        return new JsonResponse([], 404);
+
+    }
+
+    /**
+     * @Route("/slots/{doctorId}", methods={"POST"})
+     * @param int $doctorId
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function saveSlots(int $doctorId, Request $request)
+    {
+        $doctor = $this->getDoctor($doctorId);
+
+        $slot = $this->createSlot(
+            $doctor,
+            new \DateTime($request->get('day')),
+            (int)$request->get('duration'),
+            $request->get('from_hour')
+        );
+
+        $this->save($slot);
+
+        return new JsonResponse(['id' => $slot->getId()]);
     }
 
     /**
