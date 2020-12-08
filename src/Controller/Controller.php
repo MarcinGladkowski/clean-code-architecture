@@ -60,29 +60,6 @@ class Controller extends AbstractController
     }
 
     /**
-     * @Route("/slots/{doctorId}", methods={"POST"})
-     * @param int $doctorId
-     * @param Request $request
-     * @return JsonResponse
-     * @throws \Exception
-     */
-    public function addSlotsAction(int $doctorId, Request $request): JsonResponse
-    {
-        $doctor = $this->getDoctor($doctorId);
-
-        $slot = $this->createSlotFromRequest(
-            $doctor,
-            new \DateTime($request->get('day')),
-            (int)$request->get('duration'),
-            $request->get('from_hour')
-        );
-
-        $this->save($slot);
-
-        return new JsonResponse(['id' => $slot->getId()]);
-    }
-
-    /**
      * @return ObjectManager|EntityManagerInterface
      */
     private function getObjectManager()

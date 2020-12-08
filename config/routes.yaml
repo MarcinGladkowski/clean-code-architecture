@@ -20,4 +20,4 @@ slots_get:
 slots_add:
     path: /slots/{doctorId}
     methods: POST
-    controller: App\Controller\Controller::addSlotsAction
+    controller: App\Action\AddSlots

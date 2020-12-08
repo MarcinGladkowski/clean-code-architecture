@@ -23,4 +23,16 @@ final class DoctrineDoctors implements Doctors
         $this->entityManager->persist($doctor);
         $this->entityManager->flush();
     }
+
+    public function getById($id): DoctorEntity
+    {
+        return $this->entityManager->createQueryBuilder()
+            ->select('doctor')
+            ->from(DoctorEntity::class, 'doctor')
+            ->where('doctor.id=:id')
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

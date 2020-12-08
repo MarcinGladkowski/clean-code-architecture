@@ -7,4 +7,6 @@ use App\Controller\DoctorEntity;
 interface Doctors
 {
     public function add(DoctorEntity $doctor): void;
+
+    public function getById(int $id): DoctorEntity;
 }
