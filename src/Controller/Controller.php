@@ -27,7 +27,7 @@ class Controller extends AbstractController
      */
     public function addDoctorAction(Request $request)
     {
-        $doctor = $this->createDoctor(
+        $doctor = $this->createDoctorFromRequest(
             $request->get('firstName'),
             $request->get('lastName'),
             $request->get('specialization')
@@ -89,7 +89,7 @@ class Controller extends AbstractController
     {
         $doctor = $this->getDoctor($doctorId);
 
-        $slot = $this->createSlot(
+        $slot = $this->createSlotFromRequest(
             $doctor,
             new \DateTime($request->get('day')),
             (int)$request->get('duration'),
@@ -142,7 +142,7 @@ class Controller extends AbstractController
         $this->getObjectManager()->flush();
     }
 
-    private function createDoctor($firstName, $lastName, $specialization): DoctorEntity
+    private function createDoctorFromRequest($firstName, $lastName, $specialization): DoctorEntity
     {
         $doctor = new DoctorEntity();
         $doctor->setFirstName($firstName);
@@ -152,7 +152,7 @@ class Controller extends AbstractController
         return $doctor;
     }
 
-    private function createSlot(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
+    private function createSlotFromRequest(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
     {
         $slot = new SlotEntity();
         $slot->setDay($day);
