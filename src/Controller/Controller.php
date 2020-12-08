@@ -14,8 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Controller extends AbstractController
 {
-
-    public function index()
+    public function index(): JsonResponse
     {
         return new JsonResponse('ReallyDirty API v1.0');
     }
@@ -25,7 +24,7 @@ class Controller extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function addDoctorAction(Request $request)
+    public function addDoctorAction(Request $request): JsonResponse
     {
         $doctor = $this->createDoctorFromRequest(
             $request->get('firstName'),
@@ -43,7 +42,7 @@ class Controller extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getDoctorAction(Request $request)
+    public function getDoctorAction(Request $request): JsonResponse
     {
         $doctor = $this->getDoctor($request->get('id'));
 
@@ -67,7 +66,7 @@ class Controller extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getSlotsAction(int $doctorId, Request $request)
+    public function getSlotsAction(int $doctorId, Request $request): ?JsonResponse
     {
         $doctor = $this->getDoctor($doctorId);
 
@@ -85,7 +84,7 @@ class Controller extends AbstractController
      * @return JsonResponse
      * @throws \Exception
      */
-    public function addSlotsAction(int $doctorId, Request $request)
+    public function addSlotsAction(int $doctorId, Request $request): JsonResponse
     {
         $doctor = $this->getDoctor($doctorId);
 
@@ -121,7 +120,7 @@ class Controller extends AbstractController
             ->getOneOrNullResult();
     }
 
-    private function extractDoctorSlots(DoctorEntity $doctor)
+    private function extractDoctorSlots(DoctorEntity $doctor): array
     {
         $slots = $doctor->slots();
         $res = [];
