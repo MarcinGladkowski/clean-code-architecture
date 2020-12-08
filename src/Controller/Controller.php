@@ -19,23 +19,23 @@ class Controller extends AbstractController
         return new JsonResponse('ReallyDirty API v1.0');
     }
 
-    /**
-     * @Route("/doctor", methods={"POST"})
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function addDoctorAction(Request $request): JsonResponse
-    {
-        $doctor = $this->createDoctorFromRequest(
-            $request->get('firstName'),
-            $request->get('lastName'),
-            $request->get('specialization')
-        );
-
-        $this->save($doctor);
-
-        return new JsonResponse(['id' => $doctor->getId()]);
-    }
+//    /**
+//     * @Route("/doctor", methods={"POST"})
+//     * @param Request $request
+//     * @return JsonResponse
+//     */
+//    public function addDoctorAction(Request $request): JsonResponse
+//    {
+//        $doctor = $this->createDoctorFromRequest(
+//            $request->get('firstName'),
+//            $request->get('lastName'),
+//            $request->get('specialization')
+//        );
+//
+//        $this->save($doctor);
+//
+//        return new JsonResponse(['id' => $doctor->getId()]);
+//    }
 
     /**
      * @Route("/doctor", methods={"GET"})
