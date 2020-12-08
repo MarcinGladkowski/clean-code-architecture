@@ -22,11 +22,11 @@ class Controller extends AbstractController
         if ($request->getMethod() === 'GET') {
 //get doctor
             $id = $request->get('id');
-            /** @var EntityManagerInterface $man */
-            $man = $this->getDoctrine()->getManager();
+            /** @var EntityManagerInterface $objectManager */
+            $objectManager = $this->getDoctrine()->getManager();
 
 // get doctor
-            $doctor = $man->createQueryBuilder()
+            $doctor = $objectManager->createQueryBuilder()
                 ->select('doctor')
                 ->from(DoctorEntity::class, 'doctor')
                 ->where('doctor.id=:id')
@@ -47,15 +47,15 @@ class Controller extends AbstractController
             }
         } elseif ($request->getMethod() === 'POST') {
 //add doctor
-            $man = $this->getDoctrine()->getManager();
+            $objectManager = $this->getDoctrine()->getManager();
 
             $doctor = new DoctorEntity();
             $doctor->setFirstName($request->get('firstName'));
             $doctor->setLastName($request->get('lastName'));
             $doctor->setSpecialization($request->get('specialization'));
 
-            $man->persist($doctor);
-            $man->flush();
+            $objectManager->persist($doctor);
+            $objectManager->flush();
 
 // result
             return new JsonResponse(['id' => $doctor->getId()]);
@@ -66,10 +66,10 @@ class Controller extends AbstractController
 
     function slots(int $doctorId, Request $request)
     {
-        /** @var EntityManagerInterface $man */
-        $man = $this->getDoctrine()->getManager();
+        /** @var EntityManagerInterface $objectManager */
+        $objectManager = $this->getDoctrine()->getManager();
 // get doctor
-        $doc = $man->createQueryBuilder()
+        $doc = $objectManager->createQueryBuilder()
             ->select('doctor')
             ->from(DoctorEntity::class, 'doctor')
             ->where('doctor.id=:id')
@@ -107,8 +107,8 @@ class Controller extends AbstractController
                 $slot->setDuration((int)$request->get('duration'));
                 $slot->setFromHour($request->get('from_hour'));
 
-                $man->persist($slot);
-                $man->flush();
+                $objectManager->persist($slot);
+                $objectManager->flush();
 
 // result
                 return new JsonResponse(['id' => $slot->getId()]);
