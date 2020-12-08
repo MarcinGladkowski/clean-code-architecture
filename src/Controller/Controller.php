@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,10 +22,8 @@ class Controller extends AbstractController
     {
         if ($request->getMethod() === 'GET') {
             $doctorId = $request->get('id');
-            /** @var EntityManagerInterface $objectManager */
-            $objectManager = $this->getDoctrine()->getManager();
 
-            $doctor = $objectManager->createQueryBuilder()
+            $doctor = $this->getObjectManager()->createQueryBuilder()
                 ->select('doctor')
                 ->from(DoctorEntity::class, 'doctor')
                 ->where('doctor.id=:id')
@@ -61,10 +60,7 @@ class Controller extends AbstractController
 
     public function slots(int $doctorId, Request $request)
     {
-        /** @var EntityManagerInterface $objectManager */
-        $objectManager = $this->getDoctrine()->getManager();
-
-        $doctor = $objectManager->createQueryBuilder()
+        $doctor = $this->getObjectManager()->createQueryBuilder()
             ->select('doctor')
             ->from(DoctorEntity::class, 'doctor')
             ->where('doctor.id=:id')
@@ -101,14 +97,22 @@ class Controller extends AbstractController
                 $slot->setDuration((int)$request->get('duration'));
                 $slot->setFromHour($request->get('from_hour'));
 
-                $objectManager->persist($slot);
-                $objectManager->flush();
+                $this->getObjectManager()->persist($slot);
+                $this->getObjectManager()->flush();
 
                 return new JsonResponse(['id' => $slot->getId()]);
             }
         } else {
             return new JsonResponse([], 404);
         }
+    }
+
+    /**
+     * @return ObjectManager|EntityManagerInterface
+     */
+    private function getObjectManager()
+    {
+        return $this->getDoctrine()->getManager();
     }
 
 }
