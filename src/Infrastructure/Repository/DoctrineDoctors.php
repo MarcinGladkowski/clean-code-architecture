@@ -24,7 +24,7 @@ final class DoctrineDoctors implements Doctors
         $this->entityManager->flush();
     }
 
-    public function getById($id): DoctorEntity
+    public function getById(int $id): ?DoctorEntity
     {
         return $this->entityManager->createQueryBuilder()
             ->select('doctor')

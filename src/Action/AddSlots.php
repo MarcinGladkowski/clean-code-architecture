@@ -29,7 +29,7 @@ class AddSlots
 
     public function __invoke(Request $request, $doctorId): JsonResponse
     {
-        $doctor = $this->doctors->getById($doctorId);
+        $doctor = $this->doctors->getById((int) $doctorId);
 
         $slot = $this->createSlotFromRequest(
             $doctor,

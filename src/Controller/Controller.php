@@ -19,28 +19,28 @@ class Controller extends AbstractController
         return new JsonResponse('ReallyDirty API v1.0');
     }
 
-    /**
-     * @Route("/doctor", methods={"GET"})
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getDoctorAction(Request $request): JsonResponse
-    {
-        $doctor = $this->getDoctor($request->get('id'));
-
-        if (!$doctor) {
-            return new JsonResponse([], 404);
-        }
-
-        return new JsonResponse(
-            [
-                'id' => $doctor->getId(),
-                'firstName' => $doctor->getFirstName(),
-                'lastName' => $doctor->getLastName(),
-                'specialization' => $doctor->getSpecialization(),
-            ]
-        );
-    }
+//    /**
+//     * @Route("/doctor", methods={"GET"})
+//     * @param Request $request
+//     * @return JsonResponse
+//     */
+//    public function getDoctorAction(Request $request): JsonResponse
+//    {
+//        $doctor = $this->getDoctor($request->get('id'));
+//
+//        if (!$doctor) {
+//            return new JsonResponse([], 404);
+//        }
+//
+//        return new JsonResponse(
+//            [
+//                'id' => $doctor->getId(),
+//                'firstName' => $doctor->getFirstName(),
+//                'lastName' => $doctor->getLastName(),
+//                'specialization' => $doctor->getSpecialization(),
+//            ]
+//        );
+//    }
 
     /**
      * @Route("/slots/{doctorId}", methods={"GET"})
