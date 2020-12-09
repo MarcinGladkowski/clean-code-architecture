@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Model;
 
+use App\Controller\SlotEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="doctor")
  */
-class DoctorEntity
+class Doctor
 {
     /**
      * @ORM\Id

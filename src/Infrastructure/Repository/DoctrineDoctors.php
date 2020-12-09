@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Controller\DoctorEntity;
+use App\Model\Doctor;
 use App\Model\Doctors;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -18,17 +18,17 @@ final class DoctrineDoctors implements Doctors
         $this->entityManager = $entityManager;
     }
 
-    public function add(DoctorEntity $doctor): void
+    public function add(Doctor $doctor): void
     {
         $this->entityManager->persist($doctor);
         $this->entityManager->flush();
     }
 
-    public function getById(int $id): ?DoctorEntity
+    public function getById(int $id): ?Doctor
     {
         return $this->entityManager->createQueryBuilder()
             ->select('doctor')
-            ->from(DoctorEntity::class, 'doctor')
+            ->from(Doctor::class, 'doctor')
             ->where('doctor.id=:id')
             ->setParameter('id', $id)
             ->setMaxResults(1)

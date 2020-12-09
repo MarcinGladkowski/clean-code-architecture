@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Controller\DoctorEntity;
+use App\Model\Doctor;
 use App\Controller\SlotEntity;
 use App\Infrastructure\Repository\DoctrineSlots;
 use App\Model\Doctors;
@@ -43,7 +43,7 @@ class AddSlots
         return new JsonResponse(['id' => $slot->getId()]);
     }
 
-    private function createSlotFromRequest(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
+    private function createSlotFromRequest(Doctor $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
     {
         $slot = new SlotEntity();
         $slot->setDay($day);

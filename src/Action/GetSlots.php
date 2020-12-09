@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Controller\DoctorEntity;
+use App\Model\Doctor;
 use App\Controller\SlotEntity;
 use App\Model\Doctors;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,10 +33,10 @@ class GetSlots
     }
 
     /**
-     * @param DoctorEntity $doctor
+     * @param Doctor $doctor
      * @return SlotEntity[]
      */
-    private function extractDoctorSlots(DoctorEntity $doctor): array
+    private function extractDoctorSlots(Doctor $doctor): array
     {
         $slots = $doctor->slots();
         $res = [];

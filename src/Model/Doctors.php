@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
-use App\Controller\DoctorEntity;
+use App\Model\Doctor;
 
 interface Doctors
 {
-    public function add(DoctorEntity $doctor): void;
+    public function add(Doctor $doctor): void;
 
-    public function getById(int $id): ?DoctorEntity;
+    public function getById(int $id): ?Doctor;
 }

@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Controller\DoctorEntity;
+use App\Model\Doctor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Model\Doctors;
@@ -32,9 +32,9 @@ final class AddDoctor
         return new JsonResponse(['id' => $doctor->getId()]);
     }
 
-    private function createDoctorFromRequest($firstName, $lastName, $specialization): DoctorEntity
+    private function createDoctorFromRequest($firstName, $lastName, $specialization): Doctor
     {
-        $doctor = new DoctorEntity();
+        $doctor = new Doctor();
         $doctor->setFirstName($firstName);
         $doctor->setLastName($lastName);
         $doctor->setSpecialization($specialization);
