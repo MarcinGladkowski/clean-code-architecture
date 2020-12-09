@@ -71,31 +71,4 @@ class Controller extends AbstractController
         return $res;
     }
 
-    private function save($object): void
-    {
-        $this->getObjectManager()->persist($object);
-        $this->getObjectManager()->flush();
-    }
-
-    private function createDoctorFromRequest($firstName, $lastName, $specialization): DoctorEntity
-    {
-        $doctor = new DoctorEntity();
-        $doctor->setFirstName($firstName);
-        $doctor->setLastName($lastName);
-        $doctor->setSpecialization($specialization);
-
-        return $doctor;
-    }
-
-    private function createSlotFromRequest(DoctorEntity $doctor, \DateTime $day, int $duration, $fromHour): SlotEntity
-    {
-        $slot = new SlotEntity();
-        $slot->setDay($day);
-        $slot->setDoctor($doctor);
-        $slot->setDuration($duration);
-        $slot->setFromHour($fromHour);
-
-        return $slot;
-    }
-
 }
