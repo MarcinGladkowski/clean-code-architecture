@@ -2,10 +2,16 @@
 
 namespace App\Model;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Embeddable
+ */
 class Specialization
 {
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private string $name;
 

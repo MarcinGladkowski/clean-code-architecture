@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use App\Controller\SlotEntity;
+use App\Model\Slot;
 
 interface Slots
 {
-    public function add(SlotEntity $slotEntity);
+    public function add(Slot $slotEntity);
 }

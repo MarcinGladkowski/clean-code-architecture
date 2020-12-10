@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Doctor;
-use App\Controller\SlotEntity;
+use App\Model\Slot;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -13,7 +13,7 @@ abstract class E2ETestCase extends WebTestCase
 {
     protected array $entitiesToTruncate = [
         Doctor::class,
-        SlotEntity::class
+        Slot::class
     ];
 
     protected KernelBrowser $client;

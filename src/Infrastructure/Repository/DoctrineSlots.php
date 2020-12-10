@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Controller\SlotEntity;
+use App\Model\Slot;
 use App\Model\Slots;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -18,7 +18,7 @@ final class DoctrineSlots implements Slots
         $this->entityManager = $entityManager;
     }
 
-    public function add(SlotEntity $slotEntity): void
+    public function add(Slot $slotEntity): void
     {
         $this->entityManager->persist($slotEntity);
         $this->entityManager->flush();

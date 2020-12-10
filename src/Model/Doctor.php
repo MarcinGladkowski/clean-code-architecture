@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use App\Controller\SlotEntity;
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\Slots;
 
 /**
  * @ORM\Entity
@@ -23,23 +23,40 @@ class Doctor extends Entity
     protected $lastName;
 
     /**
-     * @ORM\Column(type="string")
+     * @var Specialization
+     * @ORM\Embedded(class="App\Model\Specialization", columnPrefix="specialization_")
      */
     protected $specialization;
 
     /**
-     * @ORM\OneToMany(targetEntity="SlotEntity", mappedBy="doctor")
+     * @ORM\OneToMany(targetEntity="Slot", mappedBy="doctor")
      */
     protected $slots = [];
 
-    public function __construct(string $firstName, string $lastName)
+    public function __construct(string $firstName, string $lastName, Specialization $specialization)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->specialization = $specialization;
+    }
+
+    public function firstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function lastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function specialization(): Specialization
+    {
+        return $this->specialization;
     }
 
     /**
-     * @return SlotEntity[]
+     * @return Slot[]
      */
     public function slots(): array
     {

@@ -3,7 +3,7 @@
 namespace App\Action;
 
 use App\Model\Doctor;
-use App\Controller\SlotEntity;
+use App\Model\Slot;
 use App\Model\Doctors;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class GetSlots
 
     /**
      * @param Doctor $doctor
-     * @return SlotEntity[]
+     * @return Slot[]
      */
     private function extractDoctorSlots(Doctor $doctor): array
     {

@@ -28,10 +28,10 @@ final class GetDoctor
 
         return new JsonResponse(
             [
-                'id' => $doctor->getId(),
-                'firstName' => $doctor->getFirstName(),
-                'lastName' => $doctor->getLastName(),
-                'specialization' => $doctor->getSpecialization(),
+                'id' => $doctor->id(),
+                'firstName' => $doctor->firstName(),
+                'lastName' => $doctor->lastName(),
+                'specialization' => $doctor->specialization()->name(),
             ]
         );
     }

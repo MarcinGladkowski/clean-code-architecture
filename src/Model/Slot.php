@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,15 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="slot")
  */
-final class SlotEntity
+final class Slot extends Entity
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
-    protected $id;
-
     /**
      * @ORM\Column(type="date")
      */
@@ -34,7 +27,7 @@ final class SlotEntity
     protected $duration;// minutes
 
     /**
-     * @ORM\ManyToOne(targetEntity="DoctorEntity", inversedBy="slots")
+     * @ORM\ManyToOne(targetEntity="Doctor", inversedBy="slots")
      */
     protected $doctor;
 

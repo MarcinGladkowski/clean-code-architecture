@@ -3,9 +3,12 @@
 namespace App\Action;
 
 use App\Model\Doctor;
+use App\Model\Specialization;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Model\Doctors;
+
+use function Sodium\add;
 
 final class AddDoctor
 {
@@ -29,17 +32,12 @@ final class AddDoctor
 
         $this->save($doctor);
 
-        return new JsonResponse(['id' => $doctor->getId()]);
+        return new JsonResponse(['id' => $doctor->id()]);
     }
 
     private function createDoctorFromRequest($firstName, $lastName, $specialization): Doctor
     {
-        $doctor = new Doctor();
-        $doctor->setFirstName($firstName);
-        $doctor->setLastName($lastName);
-        $doctor->setSpecialization($specialization);
-
-        return $doctor;
+        return new Doctor($firstName, $lastName, new Specialization($specialization));
     }
 
     private function save($object): void
