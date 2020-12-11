@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model\Doctor;
+use App\Model\Factory\DoctorFactory;
 use App\Model\Specialization;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,19 +17,20 @@ final class AddDoctor
      * @var Doctors
      */
     private Doctors $doctors;
+    /**
+     * @var DoctorFactory
+     */
+    private DoctorFactory $doctorFactory;
 
-    public function __construct(Doctors $doctors)
+    public function __construct(Doctors $doctors, DoctorFactory $doctorFactory)
     {
         $this->doctors = $doctors;
+        $this->doctorFactory = $doctorFactory;
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        $doctor = $this->createDoctorFromRequest(
-            $request->get('firstName'),
-            $request->get('lastName'),
-            $request->get('specialization')
-        );
+        $doctor = $this->doctorFactory->fromRequest($request);
 
         $this->save($doctor);
 

@@ -32,7 +32,14 @@ services:
         class: App\Infrastructure\Repository\DoctrineDoctors
 
     App\Model\Slots:
-        class: \App\Infrastructure\Repository\DoctrineSlots
+        class: App\Infrastructure\Repository\DoctrineSlots
+
+    App\Model\Factory\DoctorFactory:
+        class: App\Model\Factory\DoctorFactory
+
+    App\Model\Factory\SpecializationFactory:
+        class: App\Model\Factory\SpecializationFactory
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
