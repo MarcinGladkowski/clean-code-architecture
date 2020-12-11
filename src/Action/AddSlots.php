@@ -40,7 +40,7 @@ class AddSlots
 
         $this->slots->add($slot);
 
-        return new JsonResponse(['id' => $slot->getId()]);
+        return new JsonResponse(['id' => $slot->id()]);
     }
 
     private function createSlotFromRequest(Doctor $doctor, \DateTime $day, int $duration, $fromHour): Slot

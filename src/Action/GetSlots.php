@@ -42,10 +42,10 @@ class GetSlots
         $res = [];
         foreach ($slots as $slot) {
             $res[] = [
-                'id' => $slot->getId(),
-                'day' => $slot->getDay()->format('Y-m-d'),
-                'from_hour' => $slot->getFromHour(),
-                'duration' => $slot->getDuration()
+                'id' => $slot->id(),
+                'day' => $slot->day()->format('Y-m-d'),
+                'from_hour' => $slot->fromHour(),
+                'duration' => $slot->duration()
             ];
         }
         return $res;

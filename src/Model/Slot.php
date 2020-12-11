@@ -39,61 +39,23 @@ final class Slot extends Entity
         $this->fromHour = $fromHour;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getDay()
+    public function day(): \DateTime
     {
         return $this->day;
     }
 
-    /**
-     * @param mixed $day
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-    }
-
-    public function getFromHour()
+    public function fromHour(): string
     {
         return $this->fromHour;
     }
 
-    /**
-     * @param mixed $fromHour
-     */
-    public function setFromHour($fromHour)
-    {
-        $this->fromHour = $fromHour;
-    }
-
-    public function getDuration()
+    public function duration(): int
     {
         return $this->duration;
     }
 
-    /**
-     * @param mixed $duration
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
-    }
-
-    public function doctor()
+    public function doctor(): Doctor
     {
         return $this->doctor;
     }
-
-    /**
-     * @param mixed $doctor
-     */
-    public function setDoctor($doctor)
-    {
-        $this->doctor = $doctor;
-    }
-
 }
