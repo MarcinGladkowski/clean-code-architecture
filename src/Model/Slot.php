@@ -19,7 +19,7 @@ final class Slot extends Entity
     /**
      * @ORM\Column(type="string")
      */
-    protected $from_hour;
+    protected $fromHour;
 
     /**
      * @ORM\Column(type="integer")
@@ -30,6 +30,14 @@ final class Slot extends Entity
      * @ORM\ManyToOne(targetEntity="Doctor", inversedBy="slots")
      */
     protected $doctor;
+
+    public function __construct(Doctor $doctor, \DateTime $day, int $duration, string $fromHour)
+    {
+        $this->doctor = $doctor;
+        $this->day =$day;
+        $this->duration = $duration;
+        $this->fromHour = $fromHour;
+    }
 
     public function getId()
     {
@@ -51,15 +59,15 @@ final class Slot extends Entity
 
     public function getFromHour()
     {
-        return $this->from_hour;
+        return $this->fromHour;
     }
 
     /**
-     * @param mixed $from_hour
+     * @param mixed $fromHour
      */
-    public function setFromHour($from_hour)
+    public function setFromHour($fromHour)
     {
-        $this->from_hour = $from_hour;
+        $this->fromHour = $fromHour;
     }
 
     public function getDuration()

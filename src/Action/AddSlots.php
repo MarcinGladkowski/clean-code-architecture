@@ -45,12 +45,6 @@ class AddSlots
 
     private function createSlotFromRequest(Doctor $doctor, \DateTime $day, int $duration, $fromHour): Slot
     {
-        $slot = new Slot();
-        $slot->setDay($day);
-        $slot->setDoctor($doctor);
-        $slot->setDuration($duration);
-        $slot->setFromHour($fromHour);
-
-        return $slot;
+        return new Slot($doctor, $day, $duration, $fromHour);
     }
 }
