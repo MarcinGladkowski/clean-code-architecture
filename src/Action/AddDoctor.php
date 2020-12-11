@@ -37,11 +37,6 @@ final class AddDoctor
         return new JsonResponse(['id' => $doctor->id()]);
     }
 
-    private function createDoctorFromRequest($firstName, $lastName, $specialization): Doctor
-    {
-        return new Doctor($firstName, $lastName, new Specialization($specialization));
-    }
-
     private function save($object): void
     {
         $this->doctors->add($object);
