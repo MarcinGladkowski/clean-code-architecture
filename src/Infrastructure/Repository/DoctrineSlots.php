@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Model\Slot;
-use App\Model\Slots;
+use App\Domain\Model\Slot;
+use App\Domain\Model\Slots;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineSlots implements Slots

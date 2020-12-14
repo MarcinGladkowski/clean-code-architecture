@@ -2,11 +2,11 @@
 
 namespace App\Action;
 
-use App\Model\Doctor;
-use App\Model\Slot;
+use App\Domain\Model\Doctor;
+use App\Domain\Model\Slot;
 use App\Infrastructure\Repository\DoctrineSlots;
-use App\Model\Doctors;
-use App\Model\Slots;
+use App\Domain\Model\Doctors;
+use App\Domain\Model\Slots;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

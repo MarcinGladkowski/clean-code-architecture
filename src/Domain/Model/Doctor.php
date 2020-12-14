@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\Slots;
+use App\Domain\Model\Slots;
 
 /**
  * @ORM\Entity
@@ -15,18 +15,18 @@ class Doctor extends Entity
     /**
      * @ORM\Column(type="string")
      */
-    protected $firstName;
+    protected string $firstName;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $lastName;
+    protected string $lastName;
 
     /**
      * @var Specialization
-     * @ORM\Embedded(class="App\Model\Specialization", columnPrefix="specialization_")
+     * @ORM\Embedded(class="Specialization", columnPrefix="specialization_")
      */
-    protected $specialization;
+    protected Specialization $specialization;
 
     /**
      * @ORM\OneToMany(targetEntity="Slot", mappedBy="doctor")

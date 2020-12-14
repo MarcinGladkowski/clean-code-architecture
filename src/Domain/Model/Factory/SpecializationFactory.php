@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model\Factory;
+namespace App\Domain\Model\Factory;
 
-use App\Model\Specialization;
+use App\Domain\Model\Specialization;
 
 final class SpecializationFactory
 {

@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Model\Doctor;
-use App\Model\Doctors;
+use App\Domain\Model\Doctor;
+use App\Domain\Model\Doctors;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineDoctors implements Doctors

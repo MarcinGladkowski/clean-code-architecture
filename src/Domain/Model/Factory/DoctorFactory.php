@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model\Factory;
+namespace App\Domain\Model\Factory;
 
-use App\Model\Doctor;
+use App\Domain\Model\Doctor;
 use Symfony\Component\HttpFoundation\Request;
 
 final class DoctorFactory

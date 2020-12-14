@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Domain\Model;
 
-use App\Model\Doctor;
+use App\Domain\Model\Doctor;
 
 interface Doctors
 {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Domain\Model;
 
-use App\Model\Slot;
+use App\Domain\Model\Slot;
 
 interface Slots
 {

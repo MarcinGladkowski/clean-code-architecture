@@ -2,14 +2,12 @@
 
 namespace App\Action;
 
-use App\Model\Doctor;
-use App\Model\Factory\DoctorFactory;
-use App\Model\Specialization;
+use App\Domain\Model\Doctor;
+use App\Domain\Model\Factory\DoctorFactory;
+use App\Domain\Model\Specialization;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Model\Doctors;
-
-use function Sodium\add;
+use App\Domain\Model\Doctors;
 
 final class AddDoctor
 {

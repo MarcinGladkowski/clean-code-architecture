@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use App\Model\Doctors;
+use App\Domain\Model\Doctors;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

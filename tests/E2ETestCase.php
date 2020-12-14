@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Model\Doctor;
-use App\Model\Slot;
+use App\Domain\Model\Doctor;
+use App\Domain\Model\Slot;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
