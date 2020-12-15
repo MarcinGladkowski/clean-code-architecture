@@ -1,29 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace App\Action\Input;
+namespace App\Action\Output;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-final class AddDoctorInput
+final class AddDoctorOutput
 {
     /**
-     * @Assert\NotBlank()
      * @var string
      */
     private string $firstName;
     /**
-     * @Assert\NotBlank()
      * @var string
      */
     private string $lastName;
 
-    private string $specialisation;
-
-    public function __construct(string $firstName, string $lastName, string $specialisation)
+    public function __construct(string $firstName, string $lastName)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->specialisation = $specialisation;
     }
 
     /**
@@ -40,13 +33,5 @@ final class AddDoctorInput
     public function getLastName(): string
     {
         return $this->lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSpecialisation(): string
-    {
-        return $this->specialisation;
     }
 }

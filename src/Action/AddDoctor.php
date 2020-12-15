@@ -2,12 +2,11 @@
 
 namespace App\Action;
 
-use App\Domain\Model\Doctor;
+use App\Action\Input\AddDoctorInput;
 use App\Domain\Model\Factory\DoctorFactory;
-use App\Domain\Model\Specialization;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Domain\Model\Doctors;
+use App\Action\Output\AddDoctorOutput;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 final class AddDoctor
 {
@@ -26,13 +25,18 @@ final class AddDoctor
         $this->doctorFactory = $doctorFactory;
     }
 
-    public function __invoke(Request $request): JsonResponse
+    /**
+     * @ParamConverter(converter="converter.action_input", name="input")
+     * @param AddDoctorInput $input
+     * @return AddDoctorOutput
+     */
+    public function __invoke(AddDoctorInput $input): AddDoctorOutput
     {
-        $doctor = $this->doctorFactory->fromRequest($request);
+        $doctor = $this->doctorFactory->fromRequest($input);
 
         $this->save($doctor);
 
-        return new JsonResponse(['id' => $doctor->id()]);
+        return new AddDoctorOutput($doctor->firstName(), $doctor->lastName());
     }
 
     private function save($object): void

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Model\Factory;
 
+use App\Action\Input\AddDoctorInput;
 use App\Domain\Model\Doctor;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,12 +18,12 @@ final class DoctorFactory
         $this->specializationFactory = $specializationFactory;
     }
 
-    public function fromRequest(Request $request): Doctor
+    public function fromRequest(AddDoctorInput $input): Doctor
     {
         return new Doctor(
-            $request->get('firstName'),
-            $request->get('lastName'),
-            $this->specializationFactory->createFromName($request->get('specialization'))
+            $input->getFirstName(),
+            $input->getLastName(),
+            $this->specializationFactory->createFromName($input->getSpecialisation())
         );
     }
 }

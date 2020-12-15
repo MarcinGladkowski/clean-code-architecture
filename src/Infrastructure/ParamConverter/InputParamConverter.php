@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\ParamConverter;
 
+use App\Infrastructure\ParamConverter\InputFactory\InputFactory;
+use App\Infrastructure\ParamConverter\InputFactory\InputFactoryProvider;
 use App\Infrastructure\Validator\DataValidator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;

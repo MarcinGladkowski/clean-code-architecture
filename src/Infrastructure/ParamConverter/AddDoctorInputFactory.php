@@ -3,6 +3,7 @@
 namespace App\Infrastructure\ParamConverter;
 
 use App\Action\Input\AddDoctorInput;
+use App\Infrastructure\ParamConverter\InputFactory\InputFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 class AddDoctorInputFactory implements InputFactory

@@ -1,7 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Infrastructure\ParamConverter;
+namespace App\Infrastructure\ParamConverter\InputFactory;
 
+use App\Infrastructure\ParamConverter\InputFactory\InputFactory;
+use App\Infrastructure\ParamConverter\InputFactory\InputFactoryProvider;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
 class ServiceLocatorInputFactoryProvider implements InputFactoryProvider

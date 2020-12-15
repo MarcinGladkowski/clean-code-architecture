@@ -11,6 +11,10 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: true
+    _instanceof:
+        App\Infrastructure\ParamConverter\InputFactory\InputFactory:
+            tags:
+                - {name: app.input_factory}
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -23,6 +27,7 @@ services:
             - '../src/Domain/'
             - '../src/Action/Input'
             - '../src/Action/Output'
+            - '../src/Infrastructure/Exception/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -42,6 +47,24 @@ services:
     App\Domain\Model\Factory\SpecializationFactory:
         class: App\Domain\Model\Factory\SpecializationFactory
 
+    App\Infrastructure\ParamConverter\InputFactory\ServiceLocatorInputFactoryProvider:
+        class: App\Infrastructure\ParamConverter\InputFactory\ServiceLocatorInputFactoryProvider
+        arguments:
+            - !tagged_locator {tag: app.input_factory, index_by: 'key', default_index_method: 'supportedInput'}
 
+    App\Infrastructure\ParamConverter\InputParamConverter:
+        tags:
+            - {name: request.param_converter, converter: converter.action_input, priority: false}
+
+    App\Infrastructure\ExceptionHandler\DataValidationExceptionHandler:
+        tags:
+            - {name: kernel.event_listener, event: kernel.exception}
+
+    App\Infrastructure\Responder\JsonResponder:
+        tags:
+            - {name: kernel.event_listener, event: kernel.view}
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        tags: [serializer.normalizer]
