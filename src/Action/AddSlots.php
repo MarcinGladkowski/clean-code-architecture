@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Action\Input\AddSlotsInput;
 use App\Domain\Model\Doctor;
 use App\Domain\Model\Slot;
 use App\Infrastructure\Repository\DoctrineSlots;
@@ -27,9 +28,9 @@ class AddSlots
         $this->doctors = $doctors;
     }
 
-    public function __invoke(Request $request, $doctorId): JsonResponse
+    public function __invoke(AddSlotsInput $input): JsonResponse
     {
-        $doctor = $this->doctors->getById((int) $doctorId);
+        $doctor = $this->doctors->getById((int) $input->getDoctorId());
 
         $slot = $this->createSlotFromRequest(
             $doctor,

@@ -17,7 +17,7 @@ doctor_get:
 #    methods: GET
 #    controller: App\Action\GetSlots
 #
-#slots_add:
-#    path: /slots/{doctorId}
-#    methods: POST
-#    controller: App\Action\AddSlots
+slots_add:
+    path: /slots/{doctorId}
+    methods: POST
+    controller: App\Action\AddSlots
