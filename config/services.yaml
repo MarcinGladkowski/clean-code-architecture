@@ -47,6 +47,9 @@ services:
     App\Domain\Model\Factory\SpecializationFactory:
         class: App\Domain\Model\Factory\SpecializationFactory
 
+    App\Domain\Model\Factory\SlotFactory:
+        class: App\Domain\Model\Factory\SlotFactory
+
     App\Infrastructure\ParamConverter\InputFactory\ServiceLocatorInputFactoryProvider:
         class: App\Infrastructure\ParamConverter\InputFactory\ServiceLocatorInputFactoryProvider
         arguments:

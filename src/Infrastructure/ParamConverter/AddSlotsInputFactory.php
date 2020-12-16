@@ -11,9 +11,9 @@ final class AddSlotsInputFactory implements InputFactory
     public function createFromRequest(Request $request): object
     {
         return new AddSlotsInput(
-            $request->get('doctorId'),
-            new \DateTime($request->get('day')),
             (int) $request->get('doctorId'),
+            new \DateTime($request->get('day')),
+            (int) $request->get('duration'),
             $request->get('from_hour')
         );
     }
