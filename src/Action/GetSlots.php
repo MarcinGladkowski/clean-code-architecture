@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Action\Input\GetSlotsInput;
 use App\Domain\Model\Doctor;
 use App\Domain\Model\Slot;
 use App\Domain\Model\Doctors;
@@ -20,9 +21,9 @@ class GetSlots
         $this->doctors = $doctors;
     }
 
-    public function __invoke(Request $request, $doctorId)
+    public function __invoke(GetSlotsInput $input)
     {
-        $doctor = $this->doctors->getById((int)$doctorId);
+        $doctor = $this->doctors->getById($input->getDoctorId());
 
         if (!$doctor) {
             return new JsonResponse([], 404);
