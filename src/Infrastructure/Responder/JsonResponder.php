@@ -19,10 +19,6 @@ final class JsonResponder
 
     public function __invoke(ViewEvent $viewEvent): void
     {
-        if (self::SUPPORTED_CONTENT_TYPE !== $viewEvent->getRequest()->getContentType()) {
-            return;
-        }
-
         $viewEvent->setResponse(
           new JsonResponse(
               $this->serializer->serialize($viewEvent->getControllerResult(), 'json'),
