@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Action\Input\AddSlotsInput;
+use App\Action\Output\AddSlotsOutput;
 use App\Domain\Model\Factory\SlotFactory;
 use App\Domain\Model\Slots;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,12 +20,12 @@ class AddSlots
         $this->slotFactory = $slotFactory;
     }
 
-    public function __invoke(AddSlotsInput $input): JsonResponse
+    public function __invoke(AddSlotsInput $input): AddSlotsOutput
     {
         $slot = $this->slotFactory->fromRequest($input);
 
         $this->slots->add($slot);
 
-        return new JsonResponse(['id' => $slot->id()]);
+        return new AddSlotsOutput($slot->id());
     }
 }
