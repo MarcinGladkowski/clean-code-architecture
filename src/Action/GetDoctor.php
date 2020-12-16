@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Action\Input\GetDoctorInput;
+use App\Action\Output\GetDoctorOutput;
 use App\Domain\Model\Doctors;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,13 +28,11 @@ final class GetDoctor
             return new JsonResponse([], 404);
         }
 
-        return new JsonResponse(
-            [
-                'id' => $doctor->id(),
-                'firstName' => $doctor->firstName(),
-                'lastName' => $doctor->lastName(),
-                'specialization' => $doctor->specialization()->name(),
-            ]
+        return new GetDoctorOutput(
+            $doctor->id(),
+            $doctor->firstName(),
+            $doctor->lastName(),
+            $doctor->specialization()->name()
         );
     }
 }
