@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Action\Input\GetDoctorInput;
 use App\Domain\Model\Doctors;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +19,9 @@ final class GetDoctor
         $this->doctors = $doctors;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(GetDoctorInput $input)
     {
-        $doctor = $this->doctors->getById((int) $request->get('id'));
+        $doctor = $this->doctors->getById($input->getId());
 
         if (!$doctor) {
             return new JsonResponse([], 404);

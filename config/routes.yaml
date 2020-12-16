@@ -11,13 +11,13 @@ doctor_get:
     path: /doctor
     methods: GET
     controller: App\Action\GetDoctor
-
-slots_get:
-    path: /slots/{doctorId}
-    methods: GET
-    controller: App\Action\GetSlots
-
-slots_add:
-    path: /slots/{doctorId}
-    methods: POST
-    controller: App\Action\AddSlots
+#
+#slots_get:
+#    path: /slots/{doctorId}
+#    methods: GET
+#    controller: App\Action\GetSlots
+#
+#slots_add:
+#    path: /slots/{doctorId}
+#    methods: POST
+#    controller: App\Action\AddSlots
