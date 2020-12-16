@@ -4,34 +4,15 @@ namespace App\Action\Output;
 
 final class AddDoctorOutput
 {
-    /**
-     * @var string
-     */
-    private string $firstName;
-    /**
-     * @var string
-     */
-    private string $lastName;
+    private int $id;
 
-    public function __construct(string $firstName, string $lastName)
+    public function __construct(int $id)
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstName(): string
+    public function getId(): int
     {
-        return $this->firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
+        return $this->id;
     }
 }

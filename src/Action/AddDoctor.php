@@ -36,7 +36,7 @@ final class AddDoctor
 
         $this->save($doctor);
 
-        return new AddDoctorOutput($doctor->firstName(), $doctor->lastName());
+        return new AddDoctorOutput($doctor->id());
     }
 
     private function save($object): void
