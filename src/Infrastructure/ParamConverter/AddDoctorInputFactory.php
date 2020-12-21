@@ -17,6 +17,15 @@ class AddDoctorInputFactory implements InputFactory
         );
     }
 
+    public function createFromData(string $firstName, string $lastName, string $specialization): AddDoctorInput
+    {
+        return new AddDoctorInput(
+            $firstName,
+            $lastName,
+            $specialization
+        );
+    }
+
     public static function supportedInput(): string
     {
         return AddDoctorInput::class;
